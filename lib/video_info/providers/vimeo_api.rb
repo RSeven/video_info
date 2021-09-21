@@ -70,12 +70,10 @@ class VideoInfo
       private
 
       def generate_thumbnail(width = 200, height = nil)
-        base_uri = "https://i.vimeocdn.com/video/#{thumbnail_id}"
-        if height
-          base_uri + "_#{width}x#{height}.jpg"
-        else
-          base_uri + "_#{width}.jpg"
-        end
+        thumb_link = _video['pictures']['sizes'][0]['link']
+        thumb_size = height ? "#{width}x#{height}?r=pad" : "#{width}"
+        
+        thumb_link.gsub(/d_(.*)/, "d_#{thumb_size}")
       end
 
       def _clean_options(options)
