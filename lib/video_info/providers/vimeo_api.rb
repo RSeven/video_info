@@ -67,6 +67,10 @@ class VideoInfo
         _video['stats']['plays'].to_i
       end
 
+      def embed_url
+        _video["embed"]["html"].match(/(?<=src=").*?(?=[\&"])/)[0].sub(/^.*:/, '')
+      end
+
       private
 
       def generate_thumbnail(width = 200, height = nil)
